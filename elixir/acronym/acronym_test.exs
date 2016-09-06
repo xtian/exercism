@@ -27,4 +27,8 @@ defmodule AcronymTest do
   test "it produces acronyms ignoring punctuation and casing" do
     assert Acronym.abbreviate("Complementary Metal-Oxide semiconductor") === "CMOS"
   end
+
+  test "it produces acronyms from all caps" do
+    assert Acronym.abbreviate("GRAPHICS INTERCHANGE FORMAT") === "GIF"
+  end
 end

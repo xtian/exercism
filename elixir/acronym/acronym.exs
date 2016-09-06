@@ -6,9 +6,8 @@ defmodule Acronym do
   @spec abbreviate(String.t()) :: String.t()
   def abbreviate(string) do
     string
-    |> String.replace(~r/[a-z]([A-Z])/, " \\1") # Separate camel-cased words
+    |> String.replace(~r/[a-z]([A-Z])/, " \\1")
     |> String.split(~r/\W+/)
-    |> Enum.map(&(String.at(String.capitalize(&1), 0)))
-    |> List.to_string()
+    |> Enum.map_join(&(String.first(&1) |> String.upcase()))
   end
 end
