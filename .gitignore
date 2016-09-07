@@ -1,3 +1,7 @@
 babel-output/
+elm-stuff/
 node_modules/
 target/
+
+runtests.bat
+runtests.sh
