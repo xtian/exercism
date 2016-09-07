@@ -11,20 +11,15 @@ defmodule RunLengthEncoder do
   def encode(string) do
     string
     |> String.codepoints()
-    |> Enum.reduce([], &accumulate_runs/2)
-    |> Enum.reduce("", fn {c, count}, acc -> "#{count}#{c}#{acc}" end)
+    |> Enum.chunk_by(&(&1))
+    |> Enum.map_join(&("#{length(&1)}#{List.first(&1)}"))
   end
 
   @spec decode(String.t) :: String.t
   def decode(string) do
-    Regex.scan(~r/(\d+)(\w)/, string)
-    |> Enum.map(fn [_, count, c] -> expand_run(count, c) end)
-    |> Enum.join()
+    Regex.scan(~r/(\d+)(\w)/, string, capture: :all_but_first)
+    |> Enum.map_join(&expand_run/1)
   end
 
-  defp accumulate_runs(c, []), do: [{c, 1}]
-  defp accumulate_runs(c, [{c, count} | tail]), do: [{c, count + 1}] ++ tail
-  defp accumulate_runs(c, acc), do: [{c, 1}] ++ acc
-
-  defp expand_run(count, c), do: String.duplicate(c, String.to_integer(count))
+  defp expand_run([count, c]), do: String.duplicate(c, String.to_integer(count))
 end
