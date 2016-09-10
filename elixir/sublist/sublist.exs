@@ -6,9 +6,6 @@ defmodule Sublist do
   def compare(a, b) do
     cond do
       a === b -> :equal
-      a == [] -> :sublist
-      b == [] -> :superlist
-      length(a) == length(b) -> :unequal
       sublist?(a, b) -> :sublist
       sublist?(b, a) -> :superlist
       true -> :unequal
