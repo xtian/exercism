@@ -3,11 +3,11 @@ defmodule Acronym do
   Generate an acronym from a string.
   "This is a string" => "TIAS"
   """
-  @spec abbreviate(String.t()) :: String.t()
+  @spec abbreviate(String.t) :: String.t
   def abbreviate(string) do
     string
     |> String.replace(~r/[a-z]([A-Z])/, " \\1")
     |> String.split(~r/\W+/)
-    |> Enum.map_join(&(String.first(&1) |> String.upcase()))
+    |> Enum.map_join(&(String.first(&1) |> String.upcase))
   end
 end

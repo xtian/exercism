@@ -5,7 +5,7 @@ defmodule BracketPush do
   @spec check_brackets(String.t) :: boolean
   def check_brackets(string) do
     try do
-      string |> to_charlist() |> Enum.reduce([], &process_symbol/2) == []
+      string |> to_charlist |> Enum.reduce([], &process_symbol/2) == []
     rescue
       FunctionClauseError -> nil
     end

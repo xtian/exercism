@@ -5,12 +5,12 @@ defmodule Scrabble do
   @spec score(String.t) :: non_neg_integer
   def score(word) do
     word
-    |> String.upcase()
-    |> to_charlist()
+    |> String.upcase
+    |> to_charlist
     |> Enum.reduce(0, &(letter_score(&1) + &2))
   end
 
-  @spec letter_score(char()) :: non_neg_integer
+  @spec letter_score(char) :: non_neg_integer
   defp letter_score(l) do
     cond do
       l in 'AEIOULNRST' -> 1

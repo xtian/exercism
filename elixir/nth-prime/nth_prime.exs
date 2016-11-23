@@ -18,7 +18,7 @@ defmodule Prime do
       Stream.iterate(3, &(&1 + 1))
       |> Stream.take_while(&(&1 * &1 <= n))
       |> Enum.any?(&(rem(n, &1) == 0))
-      |> Kernel.not()
+      |> Kernel.not
     end
   end
 end

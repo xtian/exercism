@@ -12,11 +12,11 @@ defmodule Anagram do
     end
   end
 
-  @spec to_sorted_charlist(String.t) :: charlist()
+  @spec to_sorted_charlist(String.t) :: charlist
   defp to_sorted_charlist(string) do
     string
-    |> String.upcase()
-    |> to_charlist()
-    |> Enum.sort()
+    |> String.upcase
+    |> to_charlist
+    |> Enum.sort
   end
 end

@@ -50,7 +50,7 @@ defmodule Phone do
   """
   @spec area_code(String.t) :: String.t
   def area_code(raw) do
-    raw |> number() |> String.slice(0, 3)
+    raw |> number |> String.slice(0, 3)
   end
 
   @doc """

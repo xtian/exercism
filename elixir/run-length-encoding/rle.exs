@@ -10,7 +10,7 @@ defmodule RunLengthEncoder do
   def encode(""), do: ""
   def encode(string) do
     string
-    |> String.codepoints()
+    |> String.codepoints
     |> Enum.chunk_by(&(&1))
     |> Enum.map_join(&("#{length(&1)}#{List.first(&1)}"))
   end
