@@ -1,35 +1,26 @@
 module Bob exposing (hey)
 
-import Regex exposing (regex)
-import String
+import Regex
 
 
 hey : String -> String
 hey message =
-    if isShouting message then
-        "Whoa, chill out!"
-    else if isQuestion message then
-        "Sure."
-    else if isSilence message then
-        "Fine. Be that way!"
-    else
-        "Whatever."
-
-
-isQuestion : String -> Bool
-isQuestion message =
-    message |> String.endsWith "?"
-
-
-isShouting : String -> Bool
-isShouting message =
     let
-        hasLetters =
-            Regex.contains (regex "[a-zA-Z]")
+        isQuestion =
+            String.endsWith "?" message
+
+        isShouting =
+            (message == String.toUpper message)
+                && Regex.contains (Regex.regex "[a-zA-Z]") message
+
+        isSilent =
+            message |> String.trim |> String.isEmpty
     in
-        (hasLetters message) && (String.toUpper message == message)
-
-
-isSilence : String -> Bool
-isSilence =
-    String.trim >> String.isEmpty
+        if isShouting then
+            "Whoa, chill out!"
+        else if isQuestion then
+            "Sure."
+        else if isSilent then
+            "Fine. Be that way!"
+        else
+            "Whatever."
