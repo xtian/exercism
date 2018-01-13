@@ -1,8 +1,10 @@
 .stack-work/
 _build/
 babel-output/
+bower_components/
 elm-stuff/
 node_modules/
+output/
 target/
 
 runtests.bat
