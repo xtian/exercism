@@ -15,9 +15,7 @@ scores : Dict Char Int
 scores =
     let
         assignScores score letters dict =
-            letters
-                |> String.toList
-                |> List.foldl (flip Dict.insert score) dict
+            String.foldl (flip Dict.insert score) dict letters
     in
         Dict.empty
             |> assignScores 1 "AEIOULNRST"
