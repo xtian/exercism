@@ -7,31 +7,23 @@ defmodule RotationalCipher do
   "Nggnpx ng qnja"
   """
 
-  @alphabet String.graphemes("abcdefghijklmnopqrstuvwxyz")
-  @alphabet_map @alphabet |> Enum.with_index() |> Enum.into(%{})
+  @alphabet_lower ?a..?z
+  @alphabet_upper ?A..?Z
 
   @spec rotate(text :: String.t(), shift :: integer) :: String.t()
   def rotate(text, shift) do
-    text
-    |> String.graphemes()
-    |> Enum.map_join(fn char ->
-      if Regex.match?(~r/[a-zA-Z]/, char) do
-        do_rotate(char, shift)
-      else
-        char
-      end
-    end)
+    text |> to_charlist() |> Enum.map(&do_rotate(&1, shift)) |> List.to_string()
   end
 
-  defp do_rotate(char, shift) do
-    downcased = String.downcase(char)
-    index = @alphabet_map |> Map.get(downcased) |> Kernel.+(shift) |> Integer.mod(26)
-    rotated = Enum.at(@alphabet, index)
+  defp do_rotate(char, shift) when char in @alphabet_lower do
+    Enum.at(@alphabet_lower, Integer.mod(char - ?a + shift, 26))
+  end
 
-    if char == downcased do
-      rotated
-    else
-      String.upcase(rotated)
-    end
+  defp do_rotate(char, shift) when char in @alphabet_upper do
+    Enum.at(@alphabet_upper, Integer.mod(char - ?A + shift, 26))
+  end
+
+  defp do_rotate(char, _) do
+    char
   end
 end
