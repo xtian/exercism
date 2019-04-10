@@ -1,3 +1,5 @@
+.exercism/
+
 .stack-work/
 _build/
 babel-output/
