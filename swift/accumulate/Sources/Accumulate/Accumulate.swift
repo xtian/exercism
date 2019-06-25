@@ -1,5 +1,5 @@
-extension Array where Element : Any {
-  func accumulate<T: Any>(_ mapper: (Element) -> T) -> [T] {
-    return map { mapper($0) }
+extension Array {
+  func accumulate<T>(_ mapper: (Element) -> T) -> [T] {
+    return self.map(mapper)
   }
 }
