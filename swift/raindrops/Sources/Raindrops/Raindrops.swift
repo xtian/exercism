@@ -1,21 +1,19 @@
 struct Raindrops {
-  var sounds: String = ""
+    let drops: Int
 
-  init(_ count: Int) {
-    if count % 3 == 0 {
-      self.sounds += "Pling"
+    init(_ drops: Int) {
+        self.drops = drops
     }
 
-    if count % 5 == 0 {
-      self.sounds += "Plang"
-    }
+    var sounds: String {
+        var sounds = String()
 
-    if count % 7 == 0 {
-      self.sounds += "Plong"
-    }
+        if drops % 3 == 0 { sounds += "Pling" }
+        if drops % 5 == 0 { sounds += "Plang" }
+        if drops % 7 == 0 { sounds += "Plong" }
 
-    if self.sounds == "" {
-      self.sounds = "\(count)"
+        if sounds.isEmpty { sounds = "\(drops)" }
+
+        return sounds
     }
-  }
 }
