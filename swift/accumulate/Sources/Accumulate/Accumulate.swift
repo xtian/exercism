@@ -1,5 +1,11 @@
 extension Array {
     func accumulate<T>(_ mapper: (Element) -> T) -> [T] {
-        return map(mapper)
+        var output: [T] = []
+
+        for element in self {
+            output += [mapper(element)]
+        }
+
+        return output
     }
 }
